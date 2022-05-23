@@ -3,7 +3,7 @@ const Cliente = require('../models/Cliente');
 module.exports = {
   async store (req, res){
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const {nome, email, dataDeNascimento } = req.body;
 
