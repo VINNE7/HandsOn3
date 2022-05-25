@@ -18,12 +18,14 @@ module.exports = {
         allowNull: false,
         references: { model: 'clientes', key: 'id' },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       psicologo_id:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'psicologos', key: 'id' },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       }
     })
   },

@@ -5,8 +5,10 @@ class Atendimento extends Model {
     super.init({
       "data-atendimento": DataTypes.DATEONLY,
       observacao: DataTypes.TEXT,
+
     },{
       sequelize: connection,
+      tableName: 'atendimentos'
     });
   }
 

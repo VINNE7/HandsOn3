@@ -5,5 +5,5 @@ module.exports = (error, req, res, next) => {
     return res.status(error.statusCode).json(error.details);
   }
 
-  return res.status(error.status || 500).json(error);
+  return res.status(500).json(error);
 };

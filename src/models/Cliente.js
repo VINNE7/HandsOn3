@@ -8,6 +8,7 @@ class Cliente extends Model {
       "data-de-nascimento": DataTypes.DATEONLY,
     },{
       sequelize: connection,
+      tableName: 'clientes'
     });
   }
 }

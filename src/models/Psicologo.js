@@ -9,6 +9,7 @@ class Psicologo extends Model {
       apresentacao: DataTypes.TEXT,
     },{
       sequelize: connection,
+      tableName: 'psicologos'
     });
   }
 }
