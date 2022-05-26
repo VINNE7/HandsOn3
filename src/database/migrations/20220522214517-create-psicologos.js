@@ -8,6 +8,7 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
           allowNull: false,
+          unique: true,
         },
         nome: {
           type: Sequelize.STRING,
@@ -16,6 +17,7 @@ module.exports = {
         email: {
           type: Sequelize.STRING,
           allowNull: false,
+          unique: true,
         },
         senha: {
           type: Sequelize.STRING,

@@ -23,14 +23,14 @@ module.exports = {
     try {
       // console.log(req.body);
 
-      const { clienteId, psicologoId, dataAtendimento, observacao } = req.body;
+      const { clienteId, dataAtendimento, observacao } = req.body;
 
-
+      console.log(req.auth);
       // console.log(clienteId);
       // console.log(psicologoId);
 
       const cliente = await Cliente.findByPk(clienteId);
-      const psicologo = await Psicologo.findByPk(psicologoId);
+      const psicologo = await Psicologo.findByPk(req.auth.id);
 
       if (!cliente) {
         return res.status(400).json({ error: 'Cliente not found' })
@@ -43,7 +43,7 @@ module.exports = {
       const atendimento = await Atendimento.create({
         "data-atendimento": dataAtendimento,
         "cliente_id": clienteId,
-        "psicologo_id": psicologoId,
+        "psicologo_id": req.auth.id,
         observacao,
       })
 

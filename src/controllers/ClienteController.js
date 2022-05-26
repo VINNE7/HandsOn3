@@ -21,6 +21,12 @@ module.exports = {
 
       const { nome, email, dataDeNascimento } = req.body;
 
+      const emailCliente = await Cliente.findOne({where: {email: email}});
+
+      if(emailCliente){
+        return res.status(401).json({error: "Email já existente"});
+      };
+
       const cliente = await Cliente.create({ nome, email, 'data-de-nascimento': dataDeNascimento });
 
       return res.json(cliente);

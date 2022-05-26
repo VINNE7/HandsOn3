@@ -1,4 +1,5 @@
 const Psicologo = require('../models/Psicologo');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   async index(req, res){
@@ -20,13 +21,23 @@ module.exports = {
 
     const {nome, email, senha, apresentacao } = req.body;
 
+    const newPassword = bcrypt.hashSync(senha, 10);
+
+    const emailPsicologo = await Psicologo.findOne({where: { email: email }});
+
+    // console.log(emailPsicologo);
+
+    if(emailPsicologo){
+      return res.status(401).json({error: "Email já existente"});
+    }
+
     const psicologo = await Psicologo.create({
       nome,
       email,
-      senha,
+      senha: newPassword,
       apresentacao });
 
-    return res.json(psicologo);
+    return res.status(201).json(psicologo);
 
   },
 
@@ -61,13 +72,22 @@ module.exports = {
 
       const psicologo = await Psicologo.findByPk(id);
 
+      let password = psicologo.senha;
+
+      if(senha){
+        password = bcrypt.hashSync(senha, 10)
+      } 
+
+      // const password = bcrypt.hashSync(senha, 10);
+
       if(!psicologo){
         res.status(404).json({
           message: "Psicólogo não encontrado",
         });
       }
 
-      await Psicologo.update({nome, email, senha, apresentacao}, {where: {id: id} });
+
+      await Psicologo.update({nome, email, senha: password, apresentacao}, {where: {id: id} });
 
       const psicologoUpdated = await Psicologo.findByPk(id);
 
