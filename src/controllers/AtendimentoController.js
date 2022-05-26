@@ -25,7 +25,7 @@ module.exports = {
 
       const { clienteId, dataAtendimento, observacao } = req.body;
 
-      console.log(req.auth);
+      // console.log(req.auth);
       // console.log(clienteId);
       // console.log(psicologoId);
 
@@ -90,6 +90,13 @@ module.exports = {
       const {dataAtendimento, observacao} = req.body;
 
       const atendimento = await Atendimento.findByPk(idAtendimento);
+
+      console.log(atendimento.psicologo_id);
+      console.log(req.auth.id);
+
+      if(!(atendimento.psicologo_id == req.auth.id)){
+        return res.status(400).json({message: "Not Authorized"});
+      }
 
       if(!atendimento){
         res.status(404).json({

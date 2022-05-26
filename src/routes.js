@@ -25,8 +25,8 @@ routes.delete('/clientes/:id', ClienteValidation.delete, ClienteController.destr
 routes.post('/atendimentos', Auth, AtendimentoValidation.store, AtendimentoController.store);
 routes.get('/atendimentos', AtendimentoController.index);
 routes.get('/atendimentos/:id', AtendimentoValidation.show, AtendimentoController.show);
-routes.put('/atendimentos/:id', AtendimentoValidation.update, AtendimentoController.update);
-routes.delete('/atendimentos/:id', AtendimentoValidation.delete, AtendimentoController.destroy);
+routes.put('/atendimentos/:id', Auth, AtendimentoValidation.update, AtendimentoController.update);
+// routes.delete('/atendimentos/:id', AtendimentoValidation.delete, AtendimentoController.destroy);
 
 routes.post('/psicologos', PsicologoValidation.store, PsicologoController.store);
 routes.get('/psicologos', PsicologoController.index);

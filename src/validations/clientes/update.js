@@ -7,6 +7,6 @@ module.exports = validate({
   body: Joi.object({
     nome: Joi.string(),
     email: Joi.string().email(),
-    dataDeNascimento: Joi.date().required(),
+    dataDeNascimento: Joi.date(),
   }),
 });
