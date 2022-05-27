@@ -4,11 +4,11 @@ module.exports = {
   async index(req, res) {
     try {
       const clientes = await Cliente.findAll();
-      res.json(clientes).status(200);
+      return res.json(clientes).status(200);
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -33,7 +33,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -47,16 +47,16 @@ module.exports = {
       const cliente = await Cliente.findByPk(id);
 
       if (!cliente) {
-        res.status(404).json({
+        return res.status(404).json({
           message: "Cliente não encontrado",
         });
       }
 
-      res.json(cliente).status(200);
+      return res.json(cliente).status(200);
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -71,7 +71,7 @@ module.exports = {
       const cliente = await Cliente.findByPk(id);
 
       if(!cliente){
-        res.status(404).json({
+        return res.status(404).json({
           message: "Cliente não encontrado",
         });
       }
@@ -80,12 +80,12 @@ module.exports = {
 
       const clienteUpdated = await Cliente.findByPk(id);
 
-      res.json(clienteUpdated).status(200);
+      return res.json(clienteUpdated).status(200);
 
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -99,18 +99,18 @@ module.exports = {
       const cliente = await Cliente.findByPk(id);
 
       if(!cliente){
-        res.status(404).json({
+        return res.status(404).json({
           message: "Atendimento não encontrado",
         });
       }
 
       await cliente.destroy();
 
-      res.status(204).send("");
+     return res.status(204).send("");
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }

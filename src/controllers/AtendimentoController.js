@@ -8,11 +8,11 @@ module.exports = {
 
     try {
       const atendimentos = await Atendimento.findAll();
-      res.json(atendimentos).status(200);
+      return res.json(atendimentos).status(200);
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -28,6 +28,7 @@ module.exports = {
       // console.log(req.auth);
       // console.log(clienteId);
       // console.log(psicologoId);
+      // console.log(dataAtendimento);
 
       const cliente = await Cliente.findByPk(clienteId);
       const psicologo = await Psicologo.findByPk(req.auth.id);
@@ -54,7 +55,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -67,17 +68,17 @@ module.exports = {
       const atendimento = await Atendimento.findByPk(id);
 
       if(!atendimento){
-        res.status(404).json({
+       return res.status(404).json({
           message: "Atendimento não encontrado",
         });
       }
 
-      res.json(atendimento).status(200);
+      return res.json(atendimento).status(200);
 
       
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -91,6 +92,7 @@ module.exports = {
 
       const atendimento = await Atendimento.findByPk(idAtendimento);
 
+
       console.log(atendimento.psicologo_id);
       console.log(req.auth.id);
 
@@ -99,7 +101,7 @@ module.exports = {
       }
 
       if(!atendimento){
-        res.status(404).json({
+        return res.status(404).json({
           message: "atendimento não encontrado",
         });
       };
@@ -108,12 +110,12 @@ module.exports = {
 
       const atendimentoUpdated = await Atendimento.findByPk(idAtendimento);
 
-      res.json(atendimentoUpdated).status(200);
+      return res.json(atendimentoUpdated).status(200);
 
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -126,7 +128,7 @@ module.exports = {
       const atendimento = await Atendimento.findByPk(id);
 
       if(!atendimento){
-        res.status(404).json({
+        return res.status(404).json({
           message: "Atendimento não encontrado",
         });
       }
@@ -137,7 +139,7 @@ module.exports = {
       await atendimento.destroy();
 
 
-      res.status(204).send("");
+      return res.status(204).send("");
 
 
     } catch (error) {

@@ -5,11 +5,11 @@ module.exports = {
   async index(req, res){
     try{
       const psicologos = await Psicologo.findAll();
-      res.json(psicologos).status(200);
+      return res.json(psicologos).status(200);
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -48,16 +48,16 @@ module.exports = {
       const psicologo = await Psicologo.findByPk(id);
 
       if (!psicologo) {
-        res.status(404).json({
+        return res.status(404).json({
           message: "Psicólogo não encontrado",
         });
       }
 
-      res.json(psicologo).status(200);
+      return res.json(psicologo).status(200);
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -81,7 +81,7 @@ module.exports = {
       // const password = bcrypt.hashSync(senha, 10);
 
       if(!psicologo){
-        res.status(404).json({
+        return res.status(404).json({
           message: "Psicólogo não encontrado",
         });
       }
@@ -91,12 +91,12 @@ module.exports = {
 
       const psicologoUpdated = await Psicologo.findByPk(id);
 
-      res.json(psicologoUpdated).status(200);
+      return res.json(psicologoUpdated).status(200);
 
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
@@ -110,18 +110,18 @@ module.exports = {
       const psicologo = await Psicologo.findByPk(id);
 
       if(!psicologo){
-        res.status(404).json({
+        return res.status(404).json({
           message: "Psicólogo não encontrado",
         });
       }
 
       await psicologo.destroy();
 
-      res.status(204).send("");
+      return res.status(204).send("");
 
     } catch (error) {
       console.log(error.message);
-      res
+      return res
         .status(500)
         .json({ error: "An error has ocurred" })
     }
